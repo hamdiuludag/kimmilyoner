@@ -115,7 +115,7 @@ function sesToggle() {
 
 function renderGiris() {
   const baglantiDurumu = state.wikiBagli
-    ? '<span class="bagli">Wikipedia API bağlı</span> · Sorular otomatik üretiliyor'
+    ? '<span class="bagli">Hazır</span> · Sorular otomatik üretiliyor'
     : '<span class="bagli-degil">Çevrimdışı · İnternet bağlantısı gerekli</span>';
   app.innerHTML = `
     <div class="screen giris">
@@ -123,7 +123,7 @@ function renderGiris() {
       <div class="logo">
         <div class="logo-tl">₺</div>
         <h1>Kim Milyoner Olmak İster?</h1>
-        <p class="alt">Tamamen Türkiye konulu · Wikipedia destekli</p>
+        <p class="alt">Tamamen Türkiye konulu · Otomatik soru sistemi</p>
       </div>
       <form id="girisForm" class="kart giris-kart">
         <label for="adInput">Kullanıcı Adınız</label>
@@ -243,7 +243,7 @@ function renderOyun() {
       <div class="screen oyun">
         <div class="yukleniyor">
           <div class="ring"></div>
-          <p>Wikipedia'dan soru hazırlanıyor…</p>
+          <p>Soru hazırlanıyor…</p>
         </div>
       </div>
     `;
@@ -306,6 +306,8 @@ function renderOyun() {
     sunucuDurdur();
     bitir(true);
   };
+  document.getElementById('menu')?.addEventListener('click', () => sunucuDurdur());
+  document.getElementById('tekrar')?.addEventListener('click', () => sunucuDurdur());
 }
 
 function renderMerdiven() {
@@ -468,7 +470,7 @@ function renderSonuc() {
   let alt = '';
   if (hata) {
     baslik = 'Soru Yüklenemedi';
-    alt = 'Wikipedia API\'ye ulaşılamadı. İnternet bağlantınızı kontrol edip tekrar deneyin.';
+    alt = 'Soru hazırlanamadı. İnternet bağlantınızı kontrol edip tekrar deneyin.';
   } else if (kazandi) {
     baslik = 'Tebrikler! Milyoner Oldunuz!';
     alt = 'Tüm soruları doğru yanıtladınız.';
@@ -496,9 +498,9 @@ function renderSonuc() {
     </div>
   `;
   document.getElementById('sesToggle').onclick = sesToggle;
-  document.getElementById('tekrar').onclick = () => { efektler.temizle(); baslaOyun(); };
+  document.getElementById('tekrar').onclick = () => { efektler.temizle(); sunucuDurdur(); baslaOyun(); };
   document.getElementById('skorlarBtn2').onclick = () => { state.ekran = 'skorlar'; render(); };
-  document.getElementById('menu').onclick = () => { efektler.temizle(); state.ekran = 'giris'; render(); };
+  document.getElementById('menu').onclick = () => { efektler.temizle(); sunucuDurdur(); state.ekran = 'giris'; render(); };
 }
 
 async function renderSkorlar() {

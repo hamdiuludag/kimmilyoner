@@ -1,10 +1,11 @@
-// Web Speech API tabanlı ultra gerçekçi Türkçe sunucu.
-// Noktalama işaretlerinde duraklamalar, duygu tonlamaları, nefes araları ve
-// bağlama uygun anlatım ile tam gerçekçi konuşma deneyimi sağlar.
+// Web Speech API tabanlı ultra akıcı Türkçe sunucu.
+// Noktalama işaretlerini SİLEBİLELİ (okumaz) ve yerine doğal duraklama koyar.
+// Bağlama göre duygu tonlamaları ve nefes araları ile tam gerçekçi konuşma.
 
 let voices = [];
 let supported = typeof window !== 'undefined' && 'speechSynthesis' in window;
 let mevcut = false;
+let konusuyor = false;
 
 function loadVoices() {
   if (!supported) return;
@@ -20,29 +21,51 @@ export function sunucuDestekli() { return supported && mevcut; }
 
 // Bağlama göre ses tonu ayarları
 const TONLAR = {
-  normal:    { rate: 0.92, pitch: 1.00, volume: 1.0 },
-  heyecanli: { rate: 1.02, pitch: 1.08, volume: 1.0 },
-  dusunur:   { rate: 0.80, pitch: 0.94, volume: 0.95 },
-  mutlu:     { rate: 0.96, pitch: 1.12, volume: 1.0 },
-  uzgun:     { rate: 0.78, pitch: 0.88, volume: 0.92 },
-  ciddi:     { rate: 0.88, pitch: 0.96, volume: 1.0 },
-  gizemli:   { rate: 0.82, pitch: 0.98, volume: 0.95 },
-  kutlama:   { rate: 0.94, pitch: 1.15, volume: 1.0 },
+  normal:    { rate: 0.95, pitch: 1.00, volume: 1.0 },
+  heyecanli: { rate: 1.02, pitch: 1.06, volume: 1.0 },
+  dusunur:   { rate: 0.82, pitch: 0.95, volume: 0.95 },
+  mutlu:     { rate: 0.97, pitch: 1.10, volume: 1.0 },
+  uzgun:     { rate: 0.80, pitch: 0.89, volume: 0.92 },
+  ciddi:     { rate: 0.90, pitch: 0.97, volume: 1.0 },
+  gizemli:   { rate: 0.84, pitch: 0.99, volume: 0.95 },
+  kutlama:   { rate: 0.96, pitch: 1.14, volume: 1.0 },
 };
 
 // Noktalama işaretlerine göre duraklama süreleri (ms)
 const DURAKLAMALAR = {
-  '.': 380, '!': 420, '?': 450,
-  ',': 220, ';': 320, ':': 300,
-  '—': 400, '–': 400, '…': 600,
+  '.': 360, '!': 400, '?': 430,
+  ',': 200, ';': 300, ':': 280,
+  '—': 380, '–': 380, '…': 520,
+  '(': 120, ')': 120, '"': 0, "'": 0,
+  '[': 0, ']': 0,
 };
 
 function bekle(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
+// Metni noktalama işaretlerinden böl; işaretleri metinden çıkarıp
+// yerine doğal duraklama koyar. Böylece TTS noktaları "nokta" diye okumaz.
+function metinParcala(metin) {
+  const parcalar = [];
+  let birikim = '';
+  for (let i = 0; i < metin.length; i++) {
+    const ch = metin[i];
+    if (DURAKLAMALAR[ch] !== undefined) {
+      const metinParca = birikim.trim();
+      if (metinParca) parcalar.push({ metin: metinParca, duraklama: DURAKLAMALAR[ch] });
+      birikim = '';
+    } else {
+      birikim += ch;
+    }
+  }
+  const son = birikim.trim();
+  if (son) parcalar.push({ metin: son, duraklama: 0 });
+  return parcalar;
+}
+
 function parcaKonus(metin, ton) {
-  if (!supported || !metin) return Promise.resolve();
+  if (!supported || !metin || !konusuyor) return Promise.resolve();
   return new Promise((resolve) => {
     const u = new SpeechSynthesisUtterance(metin);
     u.lang = 'tr-TR';
@@ -57,46 +80,39 @@ function parcaKonus(metin, ton) {
   });
 }
 
-// Metni noktalama işaretlerinden bölerek her parçayı tonla ve aralarında durakla.
-// Bu şekilde virgül, nokta, soru işareti gibi yerlerde gerçekçi nefes/duraklama olur.
+// Ana konuşma fonksiyonu: noktalamayı siler, yerine duraklama koyar.
 export async function konus(metin, tonAdi = 'normal') {
   if (!supported || !metin) return;
   speechSynthesis.cancel();
+  konusuyor = true;
   const ton = TONLAR[tonAdi] || TONLAR.normal;
-
-  const parcalar = [];
-  let birikim = '';
-  for (let i = 0; i < metin.length; i++) {
-    const ch = metin[i];
-    birikim += ch;
-    if (DURAKLAMALAR[ch] !== undefined || i === metin.length - 1) {
-      parcalar.push({ metin: birikim.trim(), duraklama: DURAKLAMALAR[ch] || 0 });
-      birikim = '';
-    }
-  }
+  const parcalar = metinParcala(metin);
 
   for (const p of parcalar) {
+    if (!konusuyor) break;
     if (p.metin) await parcaKonus(p.metin, ton);
-    if (p.duraklama > 0) await bekle(p.duraklama);
+    if (p.duraklama > 0 && konusuyor) await bekle(p.duraklama);
   }
+  konusuyor = false;
 }
 
 export function durdur() {
+  konusuyor = false;
   if (supported) speechSynthesis.cancel();
 }
 
 // --- Oyun akışı anlatımları ---
 
 const hosgeldin_mesajlari = [
-  'Hoş geldiniz. Kim Milyoner Olmak İster yarışmasına... Bugün, Türkiye konulu sorularla bilgi dağınızı sınayacağız. Hazır mısınız? Başlıyoruz.',
-  'Merhaba ve hoş geldiniz. Tamamen Türkiye konulu bu yarışmada... doğru cevaplar sizi milyonerliğe taşıyacak. Bol şans dilerim.',
+  'Hoş geldiniz. Kim Milyoner Olmak İster yarışmasına. Bugün Türkiye konulu sorularla bilgi dağınızı sınayacağız. Hazır mısınız? Başlıyoruz.',
+  'Merhaba ve hoş geldiniz. Tamamen Türkiye konulu bu yarışmada, doğru cevaplar sizi milyonerliğe taşıyacak. Bol şans dilerim.',
   'Sayın yarışmacı, hoş geldiniz. Karşınızda on beş soru ve sınırsız bir ödül merdiveni var. Hadi başlayalım.',
 ];
 
 const soru_giris = [
   'İşte sorumuz geliyor. Dikkatli okuyalım.',
   'Yeni bir soru. Lütfen dikkatle dinleyin.',
-  'Sıradaki soru... Burada ipucu size yol gösterecek.',
+  'Sıradaki soru. Burada ipucu size yol gösterecek.',
   'Karşınızda yeni bir soru daha. Hazır olun.',
 ];
 
@@ -107,7 +123,7 @@ const secenek_giris = [
 ];
 
 const dusunme = [
-  'Kararınızı verin. Acele etmeyin... ama süreyi de unutmayın.',
+  'Kararınızı verin. Acele etmeyin, ama süreyi de unutmayın.',
   'Hangisi olduğunu düşünün. İpucuyu dikkatlice okuyun.',
   'Cevabınızı seçmek için zamanınız var. İyi düşünün.',
 ];
@@ -115,12 +131,12 @@ const dusunme = [
 const dogru_mesajlari = [
   'Doğru cevap! Tebrik ederim. Harika bir bilgi.',
   'Evet, doğru! Aferin size. Bu soruyu da geçtiniz.',
-  'Doğru! İnanılmaz... Bilginize hayran kaldım.',
+  'Doğru! İnanılmaz. Bilginize hayran kaldım.',
   'Mükemmel! Doğru cevabı buldunuz. Devam edelim.',
 ];
 
 const yanlis_mesajlari = [
-  'Maalesef... Bu cevap yanlış. Doğru cevap farklıydı.',
+  'Maalesef. Bu cevap yanlış. Doğru cevap farklıydı.',
   'Üzgünüm ama bu doğru değil. Yine de cesaretiniz takdire şayan.',
   'Hayır, yanlış cevap. Doğrusunu birlikte öğrenelim.',
   'Ne yazık ki yanlış. Doğru cevabı birazdan açıklayacağım.',
