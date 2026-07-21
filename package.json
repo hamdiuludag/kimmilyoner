@@ -1,0 +1,14 @@
+{
+  "name": "kim-milyoner-olmak-ister",
+  "version": "1.0.0",
+  "description": "Türye konulu Kim Milyoner Olmak İster? bilgi yarışması - PWA, offline, Wikipedia destekli",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  }
+}

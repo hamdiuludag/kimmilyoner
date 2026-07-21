@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0" />
+  <meta name="theme-color" content="#0a0e1a" />
+  <meta name="description" content="Tamamen Türkiye konulu Kim Milyoner Olmak İster? bilgi yarışması. PWA, offline, Wikipedia destekli." />
+  <meta name="color-scheme" content="dark" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+  <link rel="apple-touch-icon" href="/icon.svg" />
+  <title>Kim Milyoner Olmak İster? · Türkiye</title>
+  <style>
+    html, body { margin: 0; padding: 0; background: #0a0e1a; color: #f5f7fb; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+    #boot { position: fixed; inset: 0; display: grid; place-items: center; background: radial-gradient(ellipse at center, #142042 0%, #0a0e1a 70%); z-index: 9999; }
+    #boot .ring { width: 64px; height: 64px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.12); border-top-color: #f5b942; animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div id="boot"><div class="ring"></div></div>
+  <div id="app"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

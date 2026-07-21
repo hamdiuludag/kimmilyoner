@@ -1,0 +1,16 @@
+{
+  "name": "Kim Milyoner Olmak İster? Türkiye",
+  "short_name": "Milyoner Türkiye",
+  "description": "Tamamen Türkiye konulu Kim Milyoner Olmak İster? bilgi yarışması. Offline çalışır.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0a0e1a",
+  "theme_color": "#0a0e1a",
+  "lang": "tr",
+  "categories": ["games", "education", "entertainment"],
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
