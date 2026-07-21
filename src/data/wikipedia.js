@@ -74,11 +74,607 @@ function karistir(dogru, yanlis) {
 }
 
 const SORU_KALIPLARI = [
-  'Aşağıdaki açıklama hangisi için geçerlidir?',
-  'Bu açıklama ile tanımlanan kavram hangisidir?',
-  'Verilen ipucu hangi konuya aittir?',
-  'Aşağıdaki bilgiler hangisine aittir?',
-  'Bu özelliklerle tanımlanan nedir?',
+  ‘Aşağıdaki açıklama hangisi için geçerlidir?’, ‘Bu açıklama ile
+tanımlanan kavram hangisidir?’, ‘Verilen ipucu hangi konuya aittir?’,
+‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu özelliklerle tanımlanan
+nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade eder?’, ‘Verilen açıklama
+hangi unsuru belirtmektedir?’, ‘Bu bilgiler hangi konu ile ilgilidir?’,
+‘Açıklaması verilen kavram hangisidir?’, ‘Bu tanımlamaya uygun cevap
+hangisidir?’, ‘Aşağıdaki açıklama hangisi için geçerlidir?’, ‘Bu
+açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen ipucu hangi konuya
+aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu özelliklerle
+tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade eder?’,
+‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler hangi konu
+ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’, ‘Aşağıdaki açıklama hangisi için
+geçerlidir?’, ‘Bu açıklama ile tanımlanan kavram hangisidir?’, ‘Verilen
+ipucu hangi konuya aittir?’, ‘Aşağıdaki bilgiler hangisine aittir?’, ‘Bu
+özelliklerle tanımlanan nedir?’, ‘Aşağıdaki tanım hangi kavramı ifade
+eder?’, ‘Verilen açıklama hangi unsuru belirtmektedir?’, ‘Bu bilgiler
+hangi konu ile ilgilidir?’, ‘Açıklaması verilen kavram hangisidir?’, ‘Bu
+tanımlamaya uygun cevap hangisidir?’,
 ];
 
 export async function soruUret(zorluk, kategori = null) {
