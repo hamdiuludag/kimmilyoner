@@ -1,10 +1,10 @@
 // Kim Milyoner Olmak İster? Türkiye - Oyun motoru ve durum makinesi.
+// Sorular Wikipedia API üzerinden otomatik üretilir.
 
 import { Ses, sesAc, sesKapat, sesDurumu } from './audio/sound.js';
 import { soruOku, aciklamaOku, durdur as sunucuDurdur, sunucuDestekli } from './audio/speech.js';
 import { Efektler } from './effects/confetti.js';
 import { sonrakiSoru, gorulenEkle, skorKaydet, skorlar, gorulenTemizle } from './data/storage.js';
-import { ZORLUK_ETIKET, SORULAR } from './data/questions.js';
 import { onlineMi } from './data/wikipedia.js';
 import './styles.css';
 
@@ -14,6 +14,8 @@ const boot = document.getElementById('boot');
 let efektler = null;
 let canvas = null;
 let sesAcik = true;
+
+const ZORLUK_ETIKET = { 1: 'Kolay', 2: 'Orta', 3: 'Zor', 4: 'Çok Zor', 5: 'Uzman' };
 
 const state = {
   ekran: 'giris',
@@ -25,22 +27,23 @@ const state = {
   hash: null,
   secim: null,
   kilitli: false,
+  yukleniyor: false,
   jokerler: { ciftCevap: true, seyirci: true, degistir: true },
   ciftCevapAktif: false,
+  ciftCevapKullanildi: false,
   seyirciSonuc: null,
-  geriSayim: null,
   timerId: null,
-  sure: 30,
   kalanSure: 30,
   wikiBagli: false,
+  sonuc: null,
 };
 
-const PARA_MERDIVENI = [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600, 51200, 102400, 204800, 409600, 819200, 1638400, 3276800, 6553600, 13107200, 26214400, 52428800, 104857600, 209715200, 419430400, 838860800, 1677721600, 3355443200, 6710886400, 13421772800, 26843545600, 53687091200];
-const GARANTI_BARAJ = [0, 4, 9, 14]; // 1.000, 5.000, 1.000.000 gibi barajlar (basamak index)
-const SURE_LIMIT = 30;
+const PARA_MERDIVENI = [100, 200, 400, 800, 1600, 3200, 6400, 12800, 25600, 51200, 102400, 204800, 409600, 819200, 1638400];
+const GARANTI_BARAJ = [0, 4, 9];
+const SURE_LIMIT = 45;
 
 function para(basamak) {
-  return PARA_MERDIVENI[basamak] ?? PARA_MERDIVENI[PARA_MERDIVENI.length - 1] * Math.pow(2, basamak - PARA_MERDIVENI.length + 1);
+  return PARA_MERDIVENI[basamak] ?? 0;
 }
 
 function formatla(n) {
@@ -48,10 +51,10 @@ function formatla(n) {
 }
 
 function zorlukBasamak(basamak) {
-  if (basamak < 4) return 1;
-  if (basamak < 9) return 2;
-  if (basamak < 14) return 3;
-  if (basamak < 19) return 4;
+  if (basamak < 3) return 1;
+  if (basamak < 6) return 2;
+  if (basamak < 9) return 3;
+  if (basamak < 12) return 4;
   return 5;
 }
 
@@ -75,8 +78,8 @@ function init() {
     state.ad = localStorage.getItem('kullanici_ad') || '';
   } catch {}
 
-  window.addEventListener('online', () => { state.wikiBagli = true; });
-  window.addEventListener('offline', () => { state.wikiBagli = false; });
+  window.addEventListener('online', () => { state.wikiBagli = true; render(); });
+  window.addEventListener('offline', () => { state.wikiBagli = false; render(); });
   state.wikiBagli = onlineMi();
 
   render();
@@ -106,27 +109,30 @@ function sesToggle() {
 }
 
 function renderGiris() {
+  const baglantiDurumu = state.wikiBagli
+    ? '<span class="bagli">Wikipedia API bağlı</span> · Sorular otomatik üretiliyor'
+    : '<span class="bagli-degil">Çevrimdışı · İnternet bağlantısı gerekli</span>';
   app.innerHTML = `
     <div class="screen giris">
       <button id="sesToggle" class="ses-btn" aria-label="Ses kontrolü"></button>
       <div class="logo">
-        <div class="logo-₺">₺</div>
+        <div class="logo-tl">₺</div>
         <h1>Kim Milyoner Olmak İster?</h1>
-        <p class="alt">Tamamen Türkiye konulu bilgi yarışması</p>
+        <p class="alt">Tamamen Türkiye konulu · Wikipedia destekli</p>
       </div>
       <form id="girisForm" class="kart giris-kart">
         <label for="adInput">Kullanıcı Adınız</label>
         <input id="adInput" type="text" autocomplete="username" placeholder="Adınızı giriniz" value="${escapeHtml(state.ad)}" maxlength="20" required />
-        <button type="submit" class="btn-primary">Başla</button>
+        <button type="submit" class="btn-primary" ${state.wikiBagli ? '' : 'disabled'}>Yarışmaya Başla</button>
         <button type="button" id="skorlarBtn" class="btn-ghost">Skor Tablosu</button>
-        <button type="button" id="temizleBtn" class="btn-ghost danger">Görülen Soruları Sıfırla</button>
       </form>
-      <p class="durum">${state.wikiBagli ? 'Wikipedia bağlı · ' : ''}Soru bankası: ${countSorular()} soru</p>
+      <p class="durum">${baglantiDurumu}</p>
     </div>
   `;
   document.getElementById('sesToggle').onclick = sesToggle;
   document.getElementById('girisForm').onsubmit = (e) => {
     e.preventDefault();
+    if (!state.wikiBagli) return;
     const v = document.getElementById('adInput').value.trim();
     if (!v) return;
     state.ad = v;
@@ -135,12 +141,6 @@ function renderGiris() {
     baslaOyun();
   };
   document.getElementById('skorlarBtn').onclick = () => { state.ekran = 'skorlar'; render(); };
-  document.getElementById('temizleBtn').onclick = async () => {
-    if (confirm('Görülen sorular sıfırlansın mı?')) {
-      await gorulenTemizle();
-      Ses.buton();
-    }
-  };
   const adInput = document.getElementById('adInput');
   setTimeout(() => adInput.focus(), 50);
 }
@@ -151,29 +151,51 @@ function baslaOyun() {
   state.basamak = 0;
   state.zorluk = 1;
   state.soru = null;
+  state.hash = null;
   state.secim = null;
   state.kilitli = false;
+  state.yukleniyor = true;
   state.jokerler = { ciftCevap: true, seyirci: true, degistir: true };
   state.ciftCevapAktif = false;
+  state.ciftCevapKullanildi = false;
   state.seyirciSonuc = null;
   render();
   sonraki();
 }
 
 async function sonraki() {
-  state.zorluk = zorlukBasamak(state.basamak);
+  state.yukleniyor = true;
   state.secim = null;
   state.kilitli = false;
   state.ciftCevapAktif = false;
+  state.ciftCevapKullanildi = false;
   state.seyirciSonuc = null;
   state.kalanSure = SURE_LIMIT;
+  state.zorluk = zorlukBasamak(state.basamak);
+  render();
+
   const { soru, hash } = await sonrakiSoru(state.zorluk);
   state.soru = soru;
   state.hash = hash;
+  state.yukleniyor = false;
+
+  if (!soru) {
+    state.ekran = 'sonuc';
+    state.sonuc = { kazandi: false, cekildi: false, hata: true };
+    render();
+    return;
+  }
+
   await gorulenEkle(hash);
   render();
   startTimer();
-  if (sunucuDestekli()) soruOku(soru.soru, soru.secenekler);
+  spikerSoruyuOku();
+}
+
+async function spikerSoruyuOku() {
+  if (!sunucuDestekli() || !state.soru) return;
+  const s = state.soru;
+  await soruOku(`${s.soru} İpucu: ${s.ipucu}`, s.secenekler);
 }
 
 function startTimer() {
@@ -202,9 +224,22 @@ function stopTimer() {
 function renderOyun() {
   const s = state.soru;
   const odulSu = para(state.basamak);
-  const odulSonraki = para(state.basamak + 1);
   const garanti = garantiOdul(state.basamak);
   const zEtiket = ZORLUK_ETIKET[state.zorluk];
+
+  if (state.yukleniyor || !s) {
+    app.innerHTML = `
+      <button id="sesToggle" class="ses-btn" aria-label="Ses kontrolü"></button>
+      <div class="screen oyun">
+        <div class="yukleniyor">
+          <div class="ring"></div>
+          <p>Wikipedia'dan soru hazırlanıyor…</p>
+        </div>
+      </div>
+    `;
+    document.getElementById('sesToggle').onclick = sesToggle;
+    return;
+  }
 
   app.innerHTML = `
     <button id="sesToggle" class="ses-btn" aria-label="Ses kontrolü"></button>
@@ -225,13 +260,15 @@ function renderOyun() {
         </div>
         <div class="soru-kart glass">
           <div class="soru-meta">
-            <span class="kategori">${s.kategori}</span>
+            <span class="kategori">${escapeHtml(s.kategori)}</span>
             <span class="zorluk-pill z${state.zorluk}">${zEtiket}</span>
           </div>
           <h2 class="soru">${escapeHtml(s.soru)}</h2>
+          <div class="ipucu">${escapeHtml(s.ipucu)}</div>
           <div class="secenekler">
             ${s.secenekler.map((opt, i) => renderSecenek(i, opt)).join('')}
           </div>
+          ${state.seyirciSonuc ? renderSeyirci() : ''}
         </div>
         <div class="jokerler">
           <button id="jCift" class="joker ${state.jokerler.ciftCevap ? '' : 'used'}" ${state.jokerler.ciftCevap ? '' : 'disabled'}>
@@ -241,11 +278,11 @@ function renderOyun() {
             <span class="j-ikon">👥</span><span class="j-ad">Seyirci</span>
           </button>
           <button id="jDegistir" class="joker ${state.jokerler.degistir ? '' : 'used'}" ${state.jokerler.degistir ? '' : 'disabled'}>
-            <span class="j-ikon">↻</span><span class="j-ad">Soruyu Değiştir</span>
+            <span class="j-ikon">↻</span><span class="j-ad">Değiştir</span>
           </button>
         </div>
         <div class="alt-islem">
-          <button id="cekil" class="btn-ghost">Ödülü Al ve Çekil</button>
+          <button id="cekil" class="btn-ghost" ${state.basamak === 0 ? 'disabled' : ''}>Ödülü Al ve Çekil</button>
         </div>
       </main>
     </div>
@@ -254,7 +291,7 @@ function renderOyun() {
   bindSecenekler();
   bindJokerler();
   document.getElementById('cekil').onclick = () => {
-    if (state.kilitli) return;
+    if (state.kilitli || state.basamak === 0) return;
     stopTimer();
     sunucuDurdur();
     bitir(true);
@@ -288,6 +325,24 @@ function renderSecenek(i, opt) {
   `;
 }
 
+function renderSeyirci() {
+  const harfler = ['A', 'B', 'C', 'D'];
+  return `
+    <div class="seyirci-sonuc">
+      <h3>Seyirci Jokeri</h3>
+      <div class="seyirci-barlar">
+        ${state.seyirciSonuc.map((yuzde, i) => `
+          <div class="seyirci-bar">
+            <span class="sb-harf">${harfler[i]}</span>
+            <div class="sb-track"><div class="sb-fill" style="width:${yuzde}%"></div></div>
+            <span class="sb-yuzde">%${yuzde}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
 function bindSecenekler() {
   document.querySelectorAll('.secenek').forEach((b) => {
     b.onclick = () => sec(b.dataset.i | 0);
@@ -306,6 +361,22 @@ function bindJokerler() {
 
 function sec(i) {
   if (state.kilitli) return;
+  if (state.ciftCevapAktif && state.ciftCevapKullanildi) {
+    stopTimer();
+    Ses.buton();
+    state.secim = i;
+    state.kilitli = true;
+    render();
+    setTimeout(() => degerlendir(), 700);
+    return;
+  }
+  if (state.ciftCevapAktif && !state.ciftCevapKullanildi) {
+    Ses.buton();
+    state.secim = i;
+    state.ciftCevapKullanildi = true;
+    render();
+    return;
+  }
   stopTimer();
   Ses.buton();
   state.secim = i;
@@ -328,13 +399,14 @@ function dogruCevap() {
   efektler.patlama(window.innerWidth / 2, window.innerHeight / 2, '#f5b942', 50);
   efektler.altin(40);
   efektler.yildiz(8);
-  setTimeout(() => {
+  if (sunucuDestekli()) sunucuDurdur();
+  setTimeout(async () => {
     Ses.para();
     efektler.konfeti(120);
     Ses.alkis();
+    if (sunucuDestekli()) await aciklamaOku(`Doğru cevap: ${state.soru.secenekler[state.soru.dogruIndex]}. ${state.soru.aciklama}`);
   }, 500);
-  setTimeout(async () => {
-    if (sunucuDestekli()) await aciklamaOku(state.soru.aciklama);
+  setTimeout(() => {
     state.basamak += 1;
     state.odul = para(state.basamak);
     if (state.basamak >= 15) {
@@ -342,13 +414,14 @@ function dogruCevap() {
     } else {
       sonraki();
     }
-  }, 2200);
+  }, 4500);
 }
 
 function yanlisCevap(secimIdx) {
   Ses.yanlis();
   document.body.classList.add('shake');
   setTimeout(() => document.body.classList.remove('shake'), 500);
+  if (sunucuDestekli()) sunucuDurdur();
   setTimeout(() => {
     Ses.uzgun();
     bitir(false, false, secimIdx);
@@ -372,20 +445,30 @@ async function bitir(cekildi, kazandi = false, secimIdx = -1) {
 }
 
 function renderSonuc() {
-  const { kazandi, cekildi } = state.sonuc;
+  const { kazandi, cekildi, hata } = state.sonuc;
   let baslik = 'Oyun Bitti';
   let alt = '';
-  if (kazandi) { baslik = 'Tebrikler! Milyoner Oldunuz!'; alt = 'Tüm soruları doğru yanıtladınız.'; }
-  else if (cekildi) { baslik = 'Ödülünüzü Aldınız'; alt = 'Stratejik bir çekilme.'; }
-  else { baslik = 'Yanlış Cevap'; alt = 'Bir sonraki sefere!';
-    if (state.odul > 0) alt += ` Garantili ödülünüz: ${formatla(state.odul)}`; }
+  if (hata) {
+    baslik = 'Soru Yüklenemedi';
+    alt = 'Wikipedia API\'ye ulaşılamadı. İnternet bağlantınızı kontrol edip tekrar deneyin.';
+  } else if (kazandi) {
+    baslik = 'Tebrikler! Milyoner Oldunuz!';
+    alt = 'Tüm soruları doğru yanıtladınız.';
+  } else if (cekildi) {
+    baslik = 'Ödülünüzü Aldınız';
+    alt = 'Stratejik bir çekilme.';
+  } else {
+    baslik = 'Yanlış Cevap';
+    alt = 'Bir sonraki sefere!';
+    if (state.odul > 0) alt += ` Garantili ödülünüz: ${formatla(state.odul)}`;
+  }
   app.innerHTML = `
     <div class="screen sonuc">
       <button id="sesToggle" class="ses-btn"></button>
       <div class="sonuc-kart glass">
         <h1>${baslik}</h1>
         <p class="alt">${alt}</p>
-        <div class="odul-buyuk">${formatla(state.odul)}</div>
+        ${!hata ? `<div class="odul-buyuk">${formatla(state.odul)}</div>` : ''}
         <div class="sonuc-islem">
           <button id="tekrar" class="btn-primary">Tekrar Oyna</button>
           <button id="skorlarBtn2" class="btn-ghost">Skor Tablosu</button>
@@ -423,6 +506,7 @@ function kullanCiftCevap() {
   if (!state.jokerler.ciftCevap || state.kilitli) return;
   state.jokerler.ciftCevap = false;
   state.ciftCevapAktif = true;
+  state.ciftCevapKullanildi = false;
   Ses.joker();
   render();
 }
@@ -433,7 +517,7 @@ function kullanSeyirci() {
   Ses.joker();
   const dogru = state.soru.dogruIndex;
   const zorluk = state.zorluk;
-  const dogruYuzde = 75 - (zorluk - 1) * 12 + Math.floor(Math.random() * 10);
+  const dogruYuzde = Math.max(35, 78 - (zorluk - 1) * 10 + Math.floor(Math.random() * 12));
   const kalan = 100 - dogruYuzde;
   const dizi = [0, 0, 0, 0];
   dizi[dogru] = dogruYuzde;
@@ -454,23 +538,8 @@ async function kullanDegistir() {
   state.jokerler.degistir = false;
   Ses.joker();
   stopTimer();
-  await gorulenEkle(state.hash);
-  const { soru, hash } = await sonrakiSoru(state.zorluk);
-  state.soru = soru;
-  state.hash = hash;
-  await gorulenEkle(hash);
-  state.secim = null;
-  state.ciftCevapAktif = false;
-  state.seyirciSonuc = null;
-  render();
-  startTimer();
-  if (sunucuDestekli()) soruOku(soru.soru, soru.secenekler);
-}
-
-function countSorular() {
-  try {
-    return SORULAR.length;
-  } catch { return 0; }
+  if (state.hash) await gorulenEkle(state.hash);
+  sonraki();
 }
 
 function escapeHtml(s) {
@@ -478,7 +547,7 @@ function escapeHtml(s) {
 }
 
 document.addEventListener('keydown', (e) => {
-  if (state.ekran !== 'oyun' || state.kilitli) return;
+  if (state.ekran !== 'oyun' || state.kilitli || state.yukleniyor) return;
   const map = { '1': 0, '2': 1, '3': 2, '4': 3, 'a': 0, 'b': 1, 'c': 2, 'd': 3, 'A': 0, 'B': 1, 'C': 2, 'D': 3 };
   if (e.key in map) sec(map[e.key]);
 });

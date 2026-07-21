@@ -1,7 +1,7 @@
 // IndexedDB + LocalStorage + hash tabanlı tekrar etmeme sistemi.
-// Sorular hash'lenerek saklanır; aynı soru ikinci kez gösterilmez.
+// Sorular Wikipedia API üzerinden üretilir; hash'lenerek saklanır.
 
-import { SORULAR } from './questions.js';
+import { soruUret } from './wikipedia.js';
 
 const DB_NAME = 'kim_milyoner';
 const DB_VERSION = 1;
@@ -77,30 +77,17 @@ export async function gorulenTemizle() {
 }
 
 export async function sonrakiSoru(zorluk, kategori = null) {
-  const havuz = SORULAR.filter((s) =>
-    s.zorluk === zorluk && (!kategori || s.kategori === kategori)
-  );
-  for (let i = havuz.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [havuz[i], havuz[j]] = [havuz[j], havuz[i]];
-  }
-  for (const s of havuz) {
-    const h = soruHash(s);
-    if (!(await gorulenMi(h))) {
-      return { soru: s, hash: h };
+  for (let deneme = 0; deneme < 6; deneme++) {
+    const soru = await soruUret(zorluk, kategori);
+    if (!soru) continue;
+    const hash = soruHash(soru);
+    if (!(await gorulenMi(hash))) {
+      return { soru, hash };
     }
   }
-  if (havuz.length) {
-    const s = havuz[Math.floor(Math.random() * havuz.length)];
-    return { soru: s, hash: soruHash(s) };
-  }
-  const yedek = SORULAR.filter((s) => s.zorluk === zorluk);
-  if (yedek.length) {
-    const s = yedek[Math.floor(Math.random() * yedek.length)];
-    return { soru: s, hash: soruHash(s) };
-  }
-  const s = SORULAR[Math.floor(Math.random() * SORULAR.length)];
-  return { soru: s, hash: soruHash(s) };
+  const sonCikis = await soruUret(zorluk, kategori);
+  if (sonCikis) return { soru: sonCikis, hash: soruHash(sonCikis) };
+  return { soru: null, hash: null };
 }
 
 export async function skorKaydet(ad, odul, zorluk) {
