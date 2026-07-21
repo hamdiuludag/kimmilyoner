@@ -2,7 +2,12 @@
 // Sorular Wikipedia API üzerinden otomatik üretilir.
 
 import { Ses, sesAc, sesKapat, sesDurumu } from './audio/sound.js';
-import { soruOku, aciklamaOku, durdur as sunucuDurdur, sunucuDestekli } from './audio/speech.js';
+import {
+  hosgeldin, soruGiris, soruOku, secenekSecildi,
+  dogruCevap as spikerDogru, yanlisCevap as spikerYanlis,
+  cekilmeAnonsu, kazandiAnonsu, kaybettiAnonsu, sureAzaldi, jokerAnonsu,
+  durdur as sunucuDurdur, sunucuDestekli,
+} from './audio/speech.js';
 import { Efektler } from './effects/confetti.js';
 import { sonrakiSoru, gorulenEkle, skorKaydet, skorlar, gorulenTemizle } from './data/storage.js';
 import { onlineMi } from './data/wikipedia.js';
@@ -139,6 +144,7 @@ function renderGiris() {
     try { localStorage.setItem('kullanici_ad', v); } catch {}
     Ses.baslangic();
     baslaOyun();
+    if (sunucuDestekli()) hosgeldin();
   };
   document.getElementById('skorlarBtn').onclick = () => { state.ekran = 'skorlar'; render(); };
   const adInput = document.getElementById('adInput');
@@ -195,7 +201,8 @@ async function sonraki() {
 async function spikerSoruyuOku() {
   if (!sunucuDestekli() || !state.soru) return;
   const s = state.soru;
-  await soruOku(`${s.soru} İpucu: ${s.ipucu}`, s.secenekler);
+  await soruGiris();
+  await soruOku(s.soru, s.ipucu, s.secenekler);
 }
 
 function startTimer() {
@@ -209,7 +216,10 @@ function startTimer() {
     const b = document.getElementById('timerBar');
     if (t) t.textContent = Math.max(0, Math.ceil(state.kalanSure)) + 's';
     if (b) b.style.width = Math.max(0, (state.kalanSure / SURE_LIMIT) * 100) + '%';
-    if (state.kalanSure <= 5 && state.kalanSure > 0) Ses.sayac();
+    if (state.kalanSure <= 5 && state.kalanSure > 0) {
+      Ses.sayac();
+      if (Math.abs(state.kalanSure - 5) < 0.05 && sunucuDestekli()) sureAzaldi();
+    }
     if (state.kalanSure <= 0) {
       stopTimer();
       yanlisCevap(-1);
@@ -361,6 +371,9 @@ function bindJokerler() {
 
 function sec(i) {
   if (state.kilitli) return;
+  const harf = ['A', 'B', 'C', 'D'][i];
+  const metin = state.soru?.secenekler?.[i];
+  if (sunucuDestekli() && harf && metin) secenekSecildi(harf, metin);
   if (state.ciftCevapAktif && state.ciftCevapKullanildi) {
     stopTimer();
     Ses.buton();
@@ -400,11 +413,12 @@ function dogruCevap() {
   efektler.altin(40);
   efektler.yildiz(8);
   if (sunucuDestekli()) sunucuDurdur();
+  const dogruMetin = state.soru.secenekler[state.soru.dogruIndex];
   setTimeout(async () => {
     Ses.para();
     efektler.konfeti(120);
     Ses.alkis();
-    if (sunucuDestekli()) await aciklamaOku(`Doğru cevap: ${state.soru.secenekler[state.soru.dogruIndex]}. ${state.soru.aciklama}`);
+    if (sunucuDestekli()) await spikerDogru(dogruMetin, state.soru.aciklama);
   }, 500);
   setTimeout(() => {
     state.basamak += 1;
@@ -419,9 +433,12 @@ function dogruCevap() {
 
 function yanlisCevap(secimIdx) {
   Ses.yanlis();
-  document.body.classList.add('shake');
+ document.body.classList.add('shake');
   setTimeout(() => document.body.classList.remove('shake'), 500);
   if (sunucuDestekli()) sunucuDurdur();
+  const secilenMetin = secimIdx >= 0 ? state.soru.secenekler[secimIdx] : 'Süre doldu';
+  const dogruMetin = state.soru.secenekler[state.soru.dogruIndex];
+  if (sunucuDestekli()) spikerYanlis(secilenMetin, dogruMetin);
   setTimeout(() => {
     Ses.uzgun();
     bitir(false, false, secimIdx);
@@ -439,8 +456,9 @@ async function bitir(cekildi, kazandi = false, secimIdx = -1) {
   await skorKaydet(state.ad, odul, state.zorluk);
   state.ekran = 'sonuc';
   state.sonuc = { kazandi, cekildi, secimIdx };
-  if (kazandi) { Ses.kazanan(); efektler.konfeti(300); efektler.altin(120); }
-  else { Ses.kaybetme(); }
+  if (kazandi) { Ses.kazanan(); efektler.konfeti(300); efektler.altin(120); if (sunucuDestekli()) kazandiAnonsu(); }
+  else if (cekildi) { if (sunucuDestekli()) cekilmeAnonsu(); }
+  else { Ses.kaybetme(); if (sunucuDestekli()) kaybettiAnonsu(); }
   render();
 }
 
@@ -508,6 +526,7 @@ function kullanCiftCevap() {
   state.ciftCevapAktif = true;
   state.ciftCevapKullanildi = false;
   Ses.joker();
+  if (sunucuDestekli()) jokerAnonsu('ciftCevap');
   render();
 }
 
@@ -515,6 +534,7 @@ function kullanSeyirci() {
   if (!state.jokerler.seyirci || state.kilitli) return;
   state.jokerler.seyirci = false;
   Ses.joker();
+  if (sunucuDestekli()) jokerAnonsu('seyirci');
   const dogru = state.soru.dogruIndex;
   const zorluk = state.zorluk;
   const dogruYuzde = Math.max(35, 78 - (zorluk - 1) * 10 + Math.floor(Math.random() * 12));
@@ -537,6 +557,7 @@ async function kullanDegistir() {
   if (!state.jokerler.degistir || state.kilitli) return;
   state.jokerler.degistir = false;
   Ses.joker();
+  if (sunucuDestekli()) jokerAnonsu('degistir');
   stopTimer();
   if (state.hash) await gorulenEkle(state.hash);
   sonraki();
